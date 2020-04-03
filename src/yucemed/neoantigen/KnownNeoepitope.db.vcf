@@ -1,0 +1,13 @@
+##fileformat=VCFv4.0
+##fileDate=20170817
+##fileDate=20170817
+##INFO=<ID=PRR,Pre-existing respnse,Type=int,1=positve,0=negative>
+##INFO=<ID=POR,Post-vaccination response,Type=int,1=positve,0=negative>
+##INFO=<ID=RT,response type,Type=str,CD4+,CD8+>
+##INFO=<ID=RR,RNA recognition,Typeint,1=positve,0=negative,0.1=undetermined>
+##INFO=<ID=APC,Peptide pulsed autologous APC,Type=int, 1=postive,0=negative,0.1=undetermined>
+##INFO=<ID=BC,Minigene expressing autologous B cell,Type=int,1=postive,0=negative,0.1=undetermined>
+##INFO=<ID=AT,Autoloogus tumor,Type=int,1=postive,0=negative,0.1=undetermined>
+##INFO=<ID=MI,Method identification,Type=int,1=yes,0=no,0.1=undetermined>
+#Gene   Change  HLAa    Peptide Epitope Reference       Info
+ACPP    p.E34K  A24:02  DRSVLAKKLKFVTLVFRHGDRSPID       KLKFVTLVF       "Patrick A. Ott,2017"   APC=1;BC=1;AT=0

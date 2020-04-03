@@ -1,37 +1,22 @@
 #!/bin/bash
 #=============================================
+#
 # File: run.TruNeo.single.sh
+#
 # Version: 1.0
+#
 # Original Author: Jiaqian Wang, wangjq@yucebio.com
+#
 # Organization: Yucebio Inc., Shenzhen
-# Description: This is the main scripts of TruNeo, which aimed at predicting and prioritizing neoantigens from DNA Variation & RNA-Seq.
+#
+# Description: This is the main scripts of TruNeo, which 
+# aimed at predicting and prioritizing neoantigens from 
+# DNA Variation & RNA-Seq.
+#
 #=============================================
 
 #1.Prerequisite
-#1) Please install the following softwares, and configure them properly:
-#	Perl 5.22.1
-#	R 3.4.4
-#	python=Python3.6
-#	python2=Python2.7
-#	netMHCpan3.2
-#		set PROG_NETMHC=/path/to/netMHCpan
-#	netMHC 4.0
-#	netchop 3.1
-#		set UTIL_TAP_PREDICT=/path/to/predict.py
-#	Star-fusion
-#	HLAminer v1.3
-#	
-#2)	The freely available resources, and could be helpful to generate inputs. You may need to configure the path in src/config/*:
-#	Reference genome hg19, download from UCSC
-#	human_g1k_v37_decoy.fasta, downloaded from GATK
-#	Annotation Databases, donwload from GATK and GENCODE
-#	STAR and Star-fusion official reference
-
-#3) Set paths to the following databases:
-#	DB_NONCHR_FA=/path/to/human_g1k_v37_decoy.fasta
-#	DB_TRANS_FASTA=/path/to/hg19.gencodev27.transcripts.fa
-#	DB_GENEPRED=/path/to/hg19.gencodev27.protein_coding.genePred
-#	DB_REFGENE=/path/to/refGene.hg19.gencodev27.txt
+# see details in README.txt
 
 #2.ENV
 #TERM=NONE
@@ -44,48 +29,7 @@ BASEDIR=$(dirname "$0" | xargs -n1 realpath)
 source ${BASEDIR}/input.config
 
 #3.INPUT
-##contents of input.config:
-#IDT=DN20N0002ADZAA02
-#IDN=DN20N0002BDZAA02
-#IDR=RN20N0002RNZAA09
-#OUTDIR=./
-#IDPair=${IDT}-VS-${IDN}
-#
-#DNA_VAF=somatic/overlap/${IDPair}/${IDPair}.somatic.vaf.filter
-#	#突变的频率、Ref/Alt深度信息，5列：
-#	#Chr Pos VAF Ref Alt
-#	#chr1    1387785 0.0221  574 13
-#AAchange=somatic/overlap/${IDPair}/${IDPair}.snv.sindel.AAchange.xls
-#	#突变的注释信息，尤其是氨基酸变化。至少要求12列，且为特定注释格式
-#	#Chr Pos Ref Alt Impact  Gene    Effect  Transcript  Biotype cDNA    Protein Isoforms
-#GERMSNP=somatic/varscan/${IDPair}/${IDPair}.snv.filt.Germline
-#	#至少10列突变列表，主要关注深度，无需后面列的注释
-#	#chrom   position    ref var normal_reads1   normal_reads2   normal_var_freq normal_gt   tumor_reads1    tumor_reads2
-#PHASING=somatic/varscan/${IDPair}/${IDPair}.phasing.info
-#	#format as following, may be empty:
-#	#1       chr1    167038333,167038334     T,T
-#	#2       chr10   16996392        AA
-#CLONAL=somatic/clonal/${IDPair}/${IDPair}.mat.result.txt
-#	#汇总了亚克隆群中各突变的频率的矩阵
-#	#Chr Start   Freq    ref alt totalq  minusq  purity  p_ccf   ccf q   p_ccf_binom ccf_binom   q_binom p_prop_test q_prop_test CCF_0 ...
-#HLAF=hla/overlap/${IDPair}/${IDPair}.hla1.4neo
-#	#HLA分型，逗号分隔
-#	#HLA-B40:01,HLA-B13:01,...
-#HLALOH=somatic/hlaloh/${IDPair}/result/${IDPair}.HLALOH_summary.xls
-#	#HLA_LOH杂合性缺失
-#	#hla_b_40_01_02  阴性
-#EXP=expression/rsem/${IDR}/${IDR}.genes.xls
-#	#RNA-Seq expression output:
-#	#gene_id transcript_id(s)        length  effective_length        expected_count  TPM     FPKM    HGNC
-#	#ENSG00000000005.5_2     ENST00000373031.4_1,ENST00000485971.1_1 940.50  698.21  0.00    0.00    0.00    TNMD
-#RNAVAF=mhc/expression/${IDPair}/${IDPair}.rna.vaf
-#	#RNA-Seq mutation table
-#	#format:chr pos AF DP.Ref DP.Alt
-#	#1       90049383        0.2593  20      7
-#RNAFusionBed=variant/starfusion/${IDR}/star-fusion.fusion_prediction.bedpe
-#	#RNA-fusion output, from Star-fusion
-#	#format:
-#	#7   102665509   -1  7   -1  117407230   FBXL13>>CTTNBP2 6   -   -   0.1409
+##Please configure the content of input.config:
 
 #4.Pipeline
 #4.1.peptide_v2.s1.sh
@@ -192,31 +136,6 @@ perl $UTIL_NEO_ANNOVAF $DNA_VAF $OUTPUT/$SAMPLE.transcript.fp.anchor.TAP.hotspot
 #	$UTIL_NEO_FILTERLOH $HLALOH $OUTPUT/$SAMPLE.final.report.txt > $OUTPUT/$SAMPLE.noLOH.final.report.txt
 #fi
 
-##*.DlNeoantigen.sh: skipped
-#hlatype=${HLAF}
-#mhc_peptide_res=${OUTDIR}/mhc/peptide/${IDPair}/${IDPair}.result.txt
-#mhc_peptide_wt=${OUTDIR}/mhc/peptide/${IDPair}/${IDPair}.widetype.txt
-#mhc_peptide_id=${OUTDIR}/mhc/peptide/${IDPair}/peptide.peptideID.txt
-#OUTPUT=${OUTDIR}/mhc/DlNeoantigen/${IDPair}/
-#SAMPLE=${IDPair}
-#mkdir -p $OUTPUT
-### program path
-##source $PATH_PIPELINECONFIG
-#export PYTHONPATH=/mnt/nfs/software/share/conda/miniconda3/envs/python3.6/lib-oldcpu/:$PYTHONPATH
-### database path
-#source $PATH_DATABASECONFIG
-#conda_dir=`dirname $ENV_CONDA`
-#source $ENV_CONDA python3.6
-#export KERAS_BACKEND=theano
-#python3 $UTIL_DlNeoantigen \
-#-i $hlatype \
-#-m $mhc_peptide_res \
-#-w $mhc_peptide_wt \
-#-p $mhc_peptide_id \
-#-s $SAMPLE \
-#-o $OUTPUT
-##source $conda_dir/deactivate
-##*.DlNeoantigen_anno.sh: skipped
 
 #4.5.FusionNeo.sh (Only analysis RNA-Seq by star-fusion)
 BEDPE=${RNAFusionBed} ##input: bed file from star-fusion
@@ -266,14 +185,13 @@ perl $UTIL_NEO_FORMAT1 -a $OUTPUT/$SAMPLE.transcript.fp.anchor.TAP.hotspot.Known
 perl $UTIL_NEO_FORMAT2 -i1 $OUTPUT/$SAMPLE.MHCI.summary.neoantigen.xls -i2 $OUTPUT/$SAMPLE.MHCI.summary.neoantigen.WBSB.xls -t RNA -o1 $OUTPUT/$SAMPLE.MHCI.summary.xls -o2 $OUTPUT/$SAMPLE.MHCI.summary.WBSB.xls
 
 
-#4.7.2./mnt/nfs/pipeline/yucecloud/modular/template/report/neoantigen.v2.sh
+#4.7.2.neoantigen.v2.sh
 #Result filter
 MUTNEO=${OUTDIR}/mhc/MHCIanno/${IDPair}/${IDPair}.noLOH.final.report.txt
 ##${INPUT[1]}=mhc/FusionNeo/${IDPair}/result.bedpe #skipped, form DNA
 FFusion=${OUTDIR}/mhc/FusionNeo/${IDR}/result.bedpe
 OUTPUT=${OUTDIR}/report/neoantigen/${IDPair}
 SAMPLE=${IDPair}
-#PARAM=${OUTDIR}/mhc/DlNeoantigenAnno/${IDPair}/${IDPair}.noLOH.final.report.txt #skipped
 INFO=MHCI.final.report.txt
 mkdir -p $OUTPUT
 if [ -e ${FFusion} ]; then
@@ -286,7 +204,5 @@ fi
 if [ -f $OUTPUT/MUTNEO.tmp ]; then
 	rm $OUTPUT/MUTNEO.tmp
 fi
-#限定config文件
 
-#4.7.3./mnt/nfs/pipeline/yucecloud/modular/template/mhc/merge2xlsx_v2.sh #skipped
-#generate spreadsheet report
+#The final result is at $OUTDIR/report/neoantigen/
