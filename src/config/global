@@ -1,11 +1,11 @@
 #PATH=$PATH:./software/bin
 
 BASEDIR=$(dirname "$0" | xargs -n1 dirname| xargs -n1 realpath)
-PATH_PIPELINE=/mnt/nfs/pipeline/yucecloud/modular
+PATH_PIPELINE=${BASEDIR}
 
-PATH_SOFTWARE=/mnt/nfs/software/share
-PATH_BIN=/mnt/nfs/software/bin
-PATH_MED=/mnt/nfs/database/global/yucemed
+PATH_SOFTWARE=${BASEDIR}/software/share
+PATH_BIN=${BASEDIR}/software/bin
+PATH_MED=${BASEDIR}/yucemed
 #PATH_DB=${BASEDIR}/database
 
 #hotspot_conf=${PATH_SOFTWARE}/vardict/vcfanno.conf
