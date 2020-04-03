@@ -15,7 +15,8 @@
 #=============================================
 
 #1.Prerequisite
-#1) Please install the following softwares, and configure them properly:
+#1) Please install the following softwares, and configure them properly,
+#	You may need to configure the path in src/config/*:
 #	·Perl 5.22.1
 #	·R 3.4.4
 #	·python=Python3.6
@@ -35,13 +36,13 @@
 #	·Annotation Databases, donwload from GATK and GENCODE
 #	·STAR and Star-fusion official reference
 #
-#3) Set paths to the following databases:
+#3) The format of in-house databases are provided as-is in ./src/yucemed, 
+#	or set the following paths in src/config/*:
+#
 #	DB_NONCHR_FA=/path/to/human_g1k_v37_decoy.fasta
 #	DB_TRANS_FASTA=/path/to/hg19.gencodev27.transcripts.fa
 #	DB_GENEPRED=/path/to/hg19.gencodev27.protein_coding.genePred
 #	DB_REFGENE=/path/to/refGene.hg19.gencodev27.txt
 #
-#4）The format of in-house databases are provided as-is in ./src/yucemed
-#
-#5）Usage:
+#2.Usage
 #	bash run.TruNeo.single.sh
