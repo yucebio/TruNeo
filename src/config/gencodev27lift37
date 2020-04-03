@@ -1,7 +1,7 @@
 BASEDIR=$(dirname "$0" | xargs -n1 dirname| xargs -n1 realpath)
 REFERENCE_GENOME=hg19
 PATH_DATABASE=/mnt/nfs/database/hg19
-PATH_MED=/mnt/nfs/database/global/yucemed
+PATH_MED=${BASEDIR}/yucemed
 
 FAFILE=${PATH_DATABASE}/reference/ucsc.hg19.fasta
 #FA_SPLIT_DIR=${PATH_DATABASE}/reference/split_by_chr
