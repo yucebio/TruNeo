@@ -1,0 +1,4 @@
+hgncid  chr     hgnc_gene_symbol        refseq_gene_symbol      gencode_gene_symbol     gencode_genename        gencode_transcript      strand  refseq_transcript       protein_id
+HGNC:658        chr7    ARF5    ARF5    ARF5    ENSG00000004059 ENST00000000233.9       +       NM_001662       NP_001653.1
+HGNC:16838      chr19   ZNF358  ZNF358  ZNF358  ENSG00000198816 ENST00000596712.1       +       #NOINFO #NOINFO
+HGNC:14339      chr19   PLEKHA4 PLEKHA4 PLEKHA4 ENSG00000105559 ENST00000596713.5       -       #NOINFO #NOINFO

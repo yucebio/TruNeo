@@ -1,0 +1,31 @@
+BASEDIR=$(dirname "$0" | xargs -n1 dirname| xargs -n1 realpath)
+REFERENCE_GENOME=hg19
+PATH_DATABASE=/mnt/nfs/database/hg19
+PATH_MED=/mnt/nfs/database/global/yucemed
+
+FAFILE=${PATH_DATABASE}/reference/ucsc.hg19.fasta
+#FA_SPLIT_DIR=${PATH_DATABASE}/reference/split_by_chr
+#CHRLIST=${PATH_DATABASE}/reference/ucsc.hg19.chrlist
+#CHRREGION=${PATH_DATABASE}/reference/ucsc.hg19.region
+#REALIGN_INDELFILE=${PATH_DATABASE}/gatk/Mills_and_1000G_gold_standard.indels.hg19.vcf.gz
+#REALIGN_DBSNP=${PATH_DATABASE}/gatk/dbsnp_138.hg19.vcf.gz
+#REALIGN_HAPMAP=${PATH_DATABASE}/gatk/hapmap_3.3.hg19.vcf.gz
+#REALIGN_OMNI=${PATH_DATABASE}/gatk/1000G_omni2.5.hg19.vcf.gz
+#REALIGN_1000G=${PATH_DATABASE}/gatk/1000G_phase1.snps.high_confidence.hg19.vcf.gz
+#DATABASE_STAR=${PATH_DATABASE}/STAR
+#DATABASE_STAR_IN=${PATH_DATABASE}/STAR/STAR_hg19
+#DB_STARFUSION_LIB=${PATH_MED}/rna/STARfusion_hg19_GCv27
+DB_NONCHR_FA=/mnt/nfs/database/grch37/reference_strelka/human_g1k_v37_decoy.fasta
+DB_TRANS_FASTA=${PATH_MED}/anno/hg19.gencodev27.transcripts.fa
+DB_GENEPRED=${PATH_MED}/anno/hg19.gencodev27.protein_coding.genePred
+DB_REFGENE=${PATH_MED}/anno/refGene.hg19.gencodev27.txt
+DB_ENSGENE=${PATH_MED}/anno/ensGene.hg19.gencodev27.txt
+DB_REFFLAT=${PATH_MED}/anno/refFlat.hg19.gencodev27.txt
+#DB_REFGENE_CODING=${PATH_MED}/anno/refGene.hg19.gencodev27.protein_coding.txt
+#DB_BED_CODING=${PATH_MED}/anno/refGene.hg19.gencodev27.protein_coding.bed
+
+
+# report #--------------------
+#-----------------------
+
+PATH_HOTSPOT=${PATH_MED}/snv/hotspot
